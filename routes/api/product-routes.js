@@ -4,19 +4,50 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
+// find all products
+// be sure to include its associated Category and Tag data
+
+router.get('/', async (req, res) => {
+  try {
+    const productVal = await Product.findAll({
+      attributes: ['id', 'product_name'],
+      include: [
+        { model: Category },
+        { model: Tag }
+      ],
+    })
+    res.status(200).json(productVal);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // get one product
-router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+// find a single product by its `id`
+// be sure to include its associated Category and Tag data
+
+router.get('/:id', async (req, res) => {
+  try {
+    const productVal = await Product.findByPk(req.params.id, {
+      include: [
+        { model: Category },
+        { model: Tag }
+      ],
+    });
+
+    if (!productVal) {
+      res.status(404).json({ message: 'Sorry, no product found matching our records, try again' });
+      return;
+    }
+
+    res.status(200).json(productVal);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",

@@ -7,14 +7,11 @@ router.get('/', async (req, res) => {
   try {
     const categoryVal = await Category.findAll({
       attributes: ['id', 'category_name'],
-      include: [{
-        model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
-      }]
-    }).then(categoryVal => res.status(200).json(categoryVal));
-  }
-  catch (err) {
-    res.status(500).json(err)
+      include: [{ model: Product }],
+    })
+    res.status(200).json(categoryVal);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
@@ -24,27 +21,26 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const categoryVal = await Category.findByPk(req.params.id, {
-      include: [{
-        model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
-      }]
-    }).then(categoryVal => (categoryVal) ? res.status(200).json : res.status(404).json
-      ({ message: 'Sorry, no category found matching our records, try again' }));
+      include: [{ model: Product }],
+    });
+
+    if (!categoryVal) {
+      res.status(404).json({ message: 'Sorry, no category found matching our records, try again' });
+      return;
+    }
+
+    res.status(200).json(categoryVal);
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
 });
-
 
 // create a new category
 
 router.post('/', async (req, res) => {
   try {
-    const newCategory = await Category.create(
-      {
-        category_id: req.body.id,
-        category_name: req.body.category_name
-      }).then(newCategory => res.status(200).json(newCategory));
+    const newCategory = await Category.create(req.body)
+    res.status(200).json(newCategory);
   } catch (err) {
     res.status(400).json(err)
   }
@@ -54,16 +50,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const updateCategory = await Category.update(
-      {
-        category_name: req.body.category_name
-      },
-      {
-        where: {
-          id: req.params.id
-        }
-      }).then(updateCategory => (updateCategory) ? res.status(200).json : res.status(404).json
-        ({ message: 'Oops, looks like you tried to update something that doesnt exist' }));
+    const updateCategory = await Category.update(req.body, {
+
+      where: {
+        id: req.params.id
+      }
+    }).then(updateCategory)
   } catch (err) {
     res.status(500).json(err);
   }
