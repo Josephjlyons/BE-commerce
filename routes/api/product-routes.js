@@ -55,6 +55,7 @@ router.post('/', async (req, res) => {
       product_name: req.body.product_name,
       price: req.body.price,
       stock: req.body.stock,
+      category_id: req.body.category_id,
     })
     console.log(tagIds)
     if (tagIds.length) {
@@ -75,7 +76,7 @@ router.post('/', async (req, res) => {
       res.status(200).json(productVal);
     } catch (err) {
       console.log(err);
-      res.status(400).json(err);
+      res.status(500).json(err);
     };
 });
 
