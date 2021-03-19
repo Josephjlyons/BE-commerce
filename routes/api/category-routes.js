@@ -25,7 +25,8 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!categoryVal) {
-      res.status(404).json({ message: 'Sorry, no category found matching our records, try again' });
+      res.status(404).json
+      ({ message: 'Sorry, no category found matching our records, try again' });
       return;
     }
 

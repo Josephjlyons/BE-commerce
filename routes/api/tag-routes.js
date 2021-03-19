@@ -25,7 +25,8 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!tagVal) {
-      res.status(404).json({ message: 'Sorry, no tag found matching our records, try again' });
+      res.status(404).json
+      ({ message: 'Sorry, no tag found matching our records, try again' });
       return;
     }
 
