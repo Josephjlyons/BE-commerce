@@ -56,7 +56,9 @@ router.put('/:id', async (req, res) => {
       where: {
         id: req.params.id
       }
-    }).then(updateTag)
+    }).then((updateTag) => {
+      res.json(updateTag)
+    })
   } catch (err) {
     res.status(500).json(err);
   }
