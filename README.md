@@ -39,7 +39,7 @@ A backend program that runs with `express.js`, allows the user to build their da
 ## Instructions
 
 1. Git clone the repository on your local machine, open up the file. Run `npm install` to install all dependencies that are required to run the application.
-2. Modify the `env` file to your personal credentials and delete the `.EXAMPLE` or simply create a new `.env` file following the structure in the example (recommended).
+2. Modify the `.env` file to your personal credentials and delete the `.EXAMPLE` or simply create a new `.env` file following the structure in the example (recommended).
 3. Create a data base (TablePlus is what was used to create and test this application) the corresponds with the database name in this file (ecommerce_db).
 4. In your database run the code provided in the `db` folder in the sql query section of your database client. (TablePlus) 
 5. Once the database is set, open the file in your comand line. Run `npm run seeds` to populate the database with starter seeds. 
