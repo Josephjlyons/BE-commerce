@@ -1,11 +1,9 @@
 # BE-commerce
 
-![image of app](image here)
-![image of app](image here)
 
 ## Application Video Walkthrough
 
-[Video Demo](video here)
+[Video Demo](https://drive.google.com/file/d/1GFC8-nH1okvjq9lX3CYfc7Gmm7RAOGra/view?usp=sharing)
 
 
 ## Table of Contents
